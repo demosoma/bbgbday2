@@ -1,14 +1,161 @@
 // galleryPhotos.js
 // Photo configuration array for the Gallery of Moments.
 // Every polaroid displays on the responsive CSS grid.
-// Feel free to replace these placeholder values with actual image paths, captions, and dates.
+// 22 real images from /public/images/gallery/
 
-export const galleryPhotos = Array.from({ length: 24 }, (_, i) => ({
-  id: `gallery_photo_${i + 1}`,
-  image: null,
-  src: null, // support both
-  caption: `Moment #${i + 1} — A beautiful chapter from our storybook journey.`,
-  date: `${10 + (i % 12)} Nov 202${(i % 5) + 1}`,
-  music: null,
-  song: null, // support both
-}));
+export const galleryPhotos = [
+  {
+    id: 'gallery_photo_1',
+    src: '/images/gallery/img1.jpg',
+    caption: 'A beautiful memory captured in time.',
+    date: null,
+    music: null,
+  },
+  {
+    id: 'gallery_photo_2',
+    src: '/images/gallery/img2.jpg',
+    caption: 'Every smile tells its own story.',
+    date: null,
+    music: null,
+  },
+  {
+    id: 'gallery_photo_3',
+    src: '/images/gallery/img3.jpg',
+    caption: 'Moments like these last forever.',
+    date: null,
+    music: null,
+  },
+  {
+    id: 'gallery_photo_4',
+    src: '/images/gallery/img4.jpg',
+    caption: 'Little pieces of a wonderful journey.',
+    date: null,
+    music: null,
+  },
+  {
+    id: 'gallery_photo_5',
+    src: '/images/gallery/img5.jpg',
+    caption: 'A chapter written in laughter.',
+    date: null,
+    music: null,
+  },
+  {
+    id: 'gallery_photo_6',
+    src: '/images/gallery/img6.jpg',
+    caption: 'The world looked brighter that day.',
+    date: null,
+    music: null,
+  },
+  {
+    id: 'gallery_photo_7',
+    src: '/images/gallery/img7.jpg',
+    caption: 'Time stood still, just for a moment.',
+    date: null,
+    music: null,
+  },
+  {
+    id: 'gallery_photo_8',
+    src: '/images/gallery/img8.jpg',
+    caption: 'Warmth captured in a single frame.',
+    date: null,
+    music: null,
+  },
+  {
+    id: 'gallery_photo_9',
+    src: '/images/gallery/img9.jpg',
+    caption: 'Every picture hides a thousand feelings.',
+    date: null,
+    music: null,
+  },
+  {
+    id: 'gallery_photo_10',
+    src: '/images/gallery/img10.jpg',
+    caption: 'A snapshot of pure joy.',
+    date: null,
+    music: null,
+  },
+  {
+    id: 'gallery_photo_11',
+    src: '/images/gallery/img11.jpg',
+    caption: 'Golden days we carry in our hearts.',
+    date: null,
+    music: null,
+  },
+  {
+    id: 'gallery_photo_12',
+    src: '/images/gallery/img12.jpg',
+    caption: 'Softly remembered, never forgotten.',
+    date: null,
+    music: null,
+  },
+  {
+    id: 'gallery_photo_13',
+    src: '/images/gallery/img13.jpg',
+    caption: 'A page from the most beautiful storybook.',
+    date: null,
+    music: null,
+  },
+  {
+    id: 'gallery_photo_14',
+    src: '/images/gallery/img14.jpg',
+    caption: 'Light, life, and endless wonder.',
+    date: null,
+    music: null,
+  },
+  {
+    id: 'gallery_photo_15',
+    src: '/images/gallery/img15.jpg',
+    caption: 'Days that made us who we are.',
+    date: null,
+    music: null,
+  },
+  {
+    id: 'gallery_photo_16',
+    src: '/images/gallery/img16.jpg',
+    caption: 'A gentle memory wrapped in warmth.',
+    date: null,
+    music: null,
+  },
+  {
+    id: 'gallery_photo_17',
+    src: '/images/gallery/img17.jpg',
+    caption: 'The kind of moment you want to live twice.',
+    date: null,
+    music: null,
+  },
+  {
+    id: 'gallery_photo_18',
+    src: '/images/gallery/img18.jpg',
+    caption: 'Tucked safely inside a polaroid.',
+    date: null,
+    music: null,
+  },
+  {
+    id: 'gallery_photo_19',
+    src: '/images/gallery/img19.jpg',
+    caption: 'Happiness frozen in a single click.',
+    date: null,
+    music: null,
+  },
+  {
+    id: 'gallery_photo_20',
+    src: '/images/gallery/img20.jpg',
+    caption: 'A treasure from the good old days.',
+    date: null,
+    music: null,
+  },
+  {
+    id: 'gallery_photo_21',
+    src: '/images/gallery/img21.jpg',
+    caption: 'Here\'s to the moments that made us smile.',
+    date: null,
+    music: null,
+  },
+  {
+    id: 'gallery_photo_22',
+    src: '/images/gallery/img22.jpg',
+    caption: 'And so the story continues...',
+    date: null,
+    music: null,
+  },
+];

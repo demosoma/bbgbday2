@@ -74,18 +74,26 @@ export const GalleryViewer = () => {
               transform: `rotate(${(i % 3 - 1) * 1.5}deg)`,
             }}
           >
-            {/* Image Placeholder */}
+            {/* Photo Image */}
             <div style={{
               width: '100%',
               aspectRatio: '1',
-              background: 'linear-gradient(135deg, #c4d4e8 0%, #a8c4dc 100%)',
+              background: '#c4d4e8',
               borderRadius: '2px',
+              overflow: 'hidden',
               position: 'relative',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
             }}>
-              <span style={{ fontSize: '20px' }}>🌸</span>
+              {photo.src ? (
+                <img
+                  src={photo.src}
+                  alt={photo.caption}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                />
+              ) : (
+                <div style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                  <span style={{ fontSize: '20px' }}>🌸</span>
+                </div>
+              )}
             </div>
             {/* Caption (mini version) */}
             <div style={{
@@ -157,24 +165,26 @@ export const GalleryViewer = () => {
                   alignItems: 'center',
                 }}
               >
-                {/* Image Placeholder */}
+                {/* Photo Image */}
                 <div style={{
                   width: '100%',
                   aspectRatio: '4/3',
-                  background: 'linear-gradient(135deg, #c4d4e8 0%, #a8c4dc 50%, #4a7c4f 100%)',
+                  background: '#c4d4e8',
                   borderRadius: '2px',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
+                  overflow: 'hidden',
                   position: 'relative',
                 }}>
-                  <svg width="100%" height="100%" viewBox="0 0 320 240" style={{ position: 'absolute', inset: 0 }}>
-                    <rect width="320" height="240" fill="#c4d4e8" />
-                    <rect y="160" width="320" height="80" fill="#4a7c4f" />
-                    <ellipse cx="80" cy="155" rx="55" ry="45" fill="#3a6b3f" />
-                    <circle cx="255" cy="55" r="30" fill="#fffbf0" opacity="0.9" />
-                  </svg>
-                  <span style={{ fontSize: '36px', zIndex: 1 }}>✨</span>
+                  {selectedPhoto.src ? (
+                    <img
+                      src={selectedPhoto.src}
+                      alt={selectedPhoto.caption}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                    />
+                  ) : (
+                    <div style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                      <span style={{ fontSize: '36px' }}>✨</span>
+                    </div>
+                  )}
                 </div>
 
                 {/* Caption */}

@@ -13,14 +13,14 @@
 export const photos = [
   {
     id: 'photo_childhood_01',
-    src: null, // Replace with: '/photos/childhood_01.jpg'
+    src: '/images/gallery/birth1.jpg',
     caption: 'A moment from the early days.',
     date: null,
     song: null,
   },
   {
     id: 'photo_college_01',
-    src: null, // Replace with: '/photos/college_01.jpg'
+    src: '/images/gallery/clg2.jpg',
     caption: 'College days — finding your place in the world.',
     date: null,
     song: null,

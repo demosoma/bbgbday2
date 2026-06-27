@@ -6,16 +6,15 @@ music: null
 illustration: null
 ---
 
-Do you remember the very first day?
+Baby from the day i saw you 
 
-The world was brand new and so were you. Everything smelled of possibility — of crayon wax and warm milk and the particular silence of a house holding its breath with love.
+I Knew there is something very deep that i have with this girl 
+i remember all small small details about you and evertyhign that you have told my dear sweet little tilli babygrilll
 
-You arrived and the universe quietly rearranged itself around you.
+I am so so so grateful to have you in my life
+it makes my life brighten and brighten 
 
-Every person who ever held you that first week carried something in their chest that they couldn't name. Not quite joy. Not quite awe. Something older than both.
+Happyyyy Birthdayyyy my tupdiiii 
 
-You were the most important thing that had ever happened to any of us.
 
-And somehow, impossibly, you still are.
-
-*— Written with love*
+*— Written with love by your truly Tillya*
