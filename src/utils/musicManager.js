@@ -12,6 +12,8 @@ const FADE_DURATION = 1800; // ms
 
 let currentAmbient = null;
 let currentChapter = null;
+let audioUnlocked = false;
+let gestureHandlerBound = false;
 
 const getSavedVolume = () => {
   try {
@@ -26,8 +28,74 @@ const saveVolume = (v) => {
   try { localStorage.setItem(STORAGE_KEY, String(v)); } catch {}
 };
 
+const isAudioContextRunning = () => {
+  try {
+    const ctx = Howler.ctx;
+    return !!ctx && (ctx.state === 'running' || Howler.state() === 'running');
+  } catch {
+    return false;
+  }
+};
+
+const resumeAudioContext = async () => {
+  if (audioUnlocked || isAudioContextRunning()) {
+    audioUnlocked = true;
+    return true;
+  }
+
+  try {
+    if (Howler.ctx && typeof Howler.ctx.resume === 'function') {
+      await Howler.ctx.resume();
+    } else if (typeof Howler.resume === 'function') {
+      Howler.resume();
+    }
+    audioUnlocked = true;
+    return true;
+  } catch {
+    return false;
+  }
+};
+
+const startHowl = (howl, volume = getSavedVolume()) => {
+  if (!howl) return;
+
+  try {
+    if (!howl.playing()) {
+      howl.volume(0);
+      howl.play();
+    }
+    howl.fade(howl.volume(), volume, FADE_DURATION);
+  } catch {}
+};
+
+const bindAudioUnlock = () => {
+  if (gestureHandlerBound || typeof window === 'undefined') return;
+  gestureHandlerBound = true;
+
+  const unlockAudio = () => {
+    window.removeEventListener('pointerdown', unlockAudio);
+    window.removeEventListener('touchstart', unlockAudio);
+    window.removeEventListener('keydown', unlockAudio);
+    window.removeEventListener('click', unlockAudio);
+
+    resumeAudioContext().then(() => {
+      if (currentAmbient && !currentAmbient.playing()) {
+        startHowl(currentAmbient, getSavedVolume());
+      }
+      if (currentChapter && !currentChapter.playing()) {
+        startHowl(currentChapter, getSavedVolume());
+      }
+    });
+  };
+
+  window.addEventListener('pointerdown', unlockAudio, { once: true, passive: true });
+  window.addEventListener('touchstart', unlockAudio, { once: true, passive: true });
+  window.addEventListener('keydown', unlockAudio, { once: true });
+  window.addEventListener('click', unlockAudio, { once: true });
+};
+
 /**
- * Creates a looping Howl and starts playing it.
+ * Creates a looping Howl and starts playing it once audio is unlocked.
  * @param {string} src
  * @param {number} volume
  * @returns {Howl}
@@ -39,8 +107,13 @@ const createTrack = (src, volume = getSavedVolume()) => {
     volume: 0,
     html5: true, // streaming — avoids decode delay
   });
-  howl.play();
-  howl.fade(0, volume, FADE_DURATION);
+
+  if (isAudioContextRunning()) {
+    startHowl(howl, volume);
+  } else {
+    bindAudioUnlock();
+  }
+
   return howl;
 };
 
@@ -49,13 +122,27 @@ const createTrack = (src, volume = getSavedVolume()) => {
  */
 const fadeOut = (howl) => {
   if (!howl) return;
-  howl.fade(howl.volume(), 0, FADE_DURATION);
-  setTimeout(() => {
-    try { howl.stop(); howl.unload(); } catch {}
-  }, FADE_DURATION + 100);
+  try {
+    howl.fade(howl.volume(), 0, FADE_DURATION);
+    setTimeout(() => {
+      try { howl.stop(); howl.unload(); } catch {}
+    }, FADE_DURATION + 100);
+  } catch {}
 };
 
 export const musicManager = {
+  start() {
+    return resumeAudioContext().then(() => {
+      if (currentAmbient && !currentAmbient.playing()) {
+        startHowl(currentAmbient, getSavedVolume());
+      }
+      if (currentChapter && !currentChapter.playing()) {
+        startHowl(currentChapter, getSavedVolume());
+      }
+      Howler.volume(getSavedVolume());
+    });
+  },
+
   /**
    * Plays ambient background music, replacing any existing ambient track.
    * Pass null to stop ambient.
@@ -84,7 +171,11 @@ export const musicManager = {
   playSfx(src) {
     if (!src) return;
     const sfx = new Howl({ src: [src], loop: false, volume: getSavedVolume() });
-    sfx.play();
+    if (isAudioContextRunning()) {
+      sfx.play();
+    } else {
+      bindAudioUnlock();
+    }
   },
 
   /**
@@ -98,7 +189,15 @@ export const musicManager = {
    * Resumes all audio.
    */
   resume() {
-    Howler.volume(getSavedVolume());
+    resumeAudioContext().then(() => {
+      if (currentAmbient && !currentAmbient.playing()) {
+        startHowl(currentAmbient, getSavedVolume());
+      }
+      if (currentChapter && !currentChapter.playing()) {
+        startHowl(currentChapter, getSavedVolume());
+      }
+      Howler.volume(getSavedVolume());
+    });
   },
 
   /**

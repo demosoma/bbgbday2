@@ -10,6 +10,7 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  position: relative;
 }
 
 /* World viewport fills the window */
@@ -18,4 +19,27 @@
   height: 100%;
   border-radius: 0;
   box-shadow: none;
+}
+
+.audio-start-button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 1000;
+  border: none;
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+  background: rgba(10, 18, 34, 0.82);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+  transition: transform 160ms ease, background 160ms ease;
+}
+
+.audio-start-button:hover {
+  transform: translateY(-1px);
+  background: rgba(20, 30, 54, 0.9);
 }

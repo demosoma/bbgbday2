@@ -4,6 +4,8 @@
 // The player's X position determines the active chapter automatically.
 // Add new chapters here — no code changes required elsewhere.
 
+import { getChapterMusic } from './musicTracks.js';
+
 export const chapters = [
   {
     id: 'birth',
@@ -12,7 +14,7 @@ export const chapters = [
     startX: 0,
     endX: 1100,
     skyTheme: 'dreamy_night',
-    music: null, // path relative to /public/audio/
+    music: getChapterMusic('birth'),
     ambientLight: 'rgba(20, 10, 60, 0.25)',
     objects: [],
   },
@@ -23,7 +25,7 @@ export const chapters = [
     startX: 1100,
     endX: 2200,
     skyTheme: 'early_morning',
-    music: null,
+    music: getChapterMusic('growing_up'),
     ambientLight: 'rgba(255, 180, 80, 0.08)',
     objects: [],
   },
@@ -34,7 +36,7 @@ export const chapters = [
     startX: 2200,
     endX: 3300,
     skyTheme: 'golden_hour',
-    music: null,
+    music: getChapterMusic('school'),
     ambientLight: 'rgba(255, 200, 100, 0.1)',
     objects: [],
   },
@@ -45,7 +47,7 @@ export const chapters = [
     startX: 3300,
     endX: 4500,
     skyTheme: 'afternoon',
-    music: null,
+    music: getChapterMusic('college'),
     ambientLight: 'rgba(100, 180, 255, 0.05)',
     objects: [],
   },
@@ -56,7 +58,7 @@ export const chapters = [
     startX: 4500,
     endX: 5700,
     skyTheme: 'golden_hour',
-    music: null,
+    music: getChapterMusic('meeting'),
     ambientLight: 'rgba(255, 160, 80, 0.12)',
     objects: [],
   },
@@ -67,7 +69,7 @@ export const chapters = [
     startX: 5700,
     endX: 7000,
     skyTheme: 'dreamy_night',
-    music: null,
+    music: getChapterMusic('letters'),
     ambientLight: 'rgba(130, 80, 255, 0.1)',
     objects: [],
   },
@@ -78,7 +80,7 @@ export const chapters = [
     startX: 7000,
     endX: 8200,
     skyTheme: 'starry_night',
-    music: null,
+    music: getChapterMusic('wish_tree'),
     ambientLight: 'rgba(60, 20, 120, 0.2)',
     objects: [],
   },
@@ -89,7 +91,7 @@ export const chapters = [
     startX: 8200,
     endX: 9600,
     skyTheme: 'sunrise',
-    music: null,
+    music: getChapterMusic('future'),
     ambientLight: 'rgba(255, 220, 150, 0.1)',
     objects: [],
   },
