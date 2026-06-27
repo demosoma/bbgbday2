@@ -1,0 +1,44 @@
+// MemoryMarker.jsx — World object: a glowing stone marker / milestone
+import React from 'react';
+
+export const MemoryMarkerObject = ({ el }) => (
+  <div
+    style={{
+      position: 'absolute',
+      left: `${el.x}px`,
+      top: `${el.y}px`,
+      pointerEvents: 'none',
+    }}
+  >
+    <svg width="50" height="70" viewBox="0 0 50 70">
+      {/* Stone post */}
+      <rect x="18" y="30" width="14" height="38" rx="3" fill="#6b7280" />
+      {/* Stone cap */}
+      <ellipse cx="25" cy="32" rx="18" ry="22" fill="#9ca3af" />
+      <ellipse cx="25" cy="28" rx="18" ry="20" fill="#d1d5db" />
+      {/* Engraved symbol */}
+      <text x="25" y="30" textAnchor="middle" fontSize="14" fill="#6b7280">★</text>
+      {/* Label */}
+      {el.label && (
+        <text x="25" y="68" textAnchor="middle" fontSize="7"
+          fill="rgba(255,255,255,0.7)" fontFamily="serif" fontStyle="italic">
+          {el.label}
+        </text>
+      )}
+      {/* Glow */}
+      <ellipse cx="25" cy="68" rx="14" ry="4" fill="rgba(180,160,220,0.25)" />
+    </svg>
+    {/* Pulsing halo */}
+    <div style={{
+      position: 'absolute',
+      top: '10px',
+      left: '50%',
+      transform: 'translateX(-50%)',
+      width: '36px',
+      height: '36px',
+      borderRadius: '50%',
+      background: 'rgba(200,180,255,0.15)',
+      animation: 'haloPulse 2.5s ease-in-out infinite',
+    }} />
+  </div>
+);

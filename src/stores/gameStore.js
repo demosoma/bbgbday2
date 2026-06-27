@@ -1,39 +1,70 @@
+// gameStore.js — Extended with chapter and interaction state
+
 import { create } from 'zustand';
 
 export const useGameStore = create((set) => ({
-  // Player State
+  // ─── Player ────────────────────────────────────────────────
   player: {
-    x: 400, // Spawn x
-    y: 350, // Spawn y (within path bounds)
-    dir: 'front', // front, back, left, right
+    x: 400,
+    y: 350,
+    dir: 'front',
     isMoving: false,
-    speed: 5, // Pixels per frame
+    speed: 5,
   },
-  
-  // Camera State
+
+  // ─── Camera ────────────────────────────────────────────────
   camera: {
     x: 400,
-    lerpSpeed: 0.08, // Camera follow smoothing factor
+    lerpSpeed: 0.08,
   },
 
-  // World Boundaries
-  worldWidth: 6000, // Width of our scrollable canvas
-  worldHeight: 600, // Height of the viewport
-  pathMinY: 300,    // Top edge of the walkable path
-  pathMaxY: 480,    // Bottom edge of the walkable path
+  // ─── World Boundaries ──────────────────────────────────────
+  worldWidth: 9600,
+  worldHeight: 600,
+  pathMinY: 300,
+  pathMaxY: 480,
 
-  // Actions
-  setPlayerPosition: (x, y) => set((state) => ({
-    player: { ...state.player, x, y }
-  })),
+  // ─── Chapter State ─────────────────────────────────────────
+  activeChapter: null,       // current chapter object
+  chapterProgress: 0,        // 0–1 within the current chapter
+  prevChapterId: null,       // for sky interpolation (previous chapter's sky theme)
+  skyBlend: 0,               // 0–1 blend between prevChapter sky and activeChapter sky
 
+  // ─── Interaction State ─────────────────────────────────────
+  interactionTarget: null,   // nearest interactable object in range { id, type, x, y, data }
+  isInteracting: false,      // true while an interaction overlay is open
+
+  // ─── Actions ───────────────────────────────────────────────
   updatePlayer: (updates) => set((state) => ({
-    player: { ...state.player, ...updates }
+    player: { ...state.player, ...updates },
   })),
 
   setCameraX: (x) => set((state) => ({
-    camera: { ...state.camera, x }
+    camera: { ...state.camera, x },
   })),
+
+  setActiveChapter: (chapter, progress) => set((state) => {
+    // When chapter changes, record the previous sky theme for blending
+    const prevId = state.activeChapter?.id ?? null;
+    const chapterChanged = state.activeChapter?.id !== chapter.id;
+    return {
+      activeChapter: chapter,
+      chapterProgress: progress,
+      prevChapterId: chapterChanged ? (prevId ?? chapter.id) : state.prevChapterId,
+      // Reset blend to 0 on chapter change so sky fades in from previous
+      skyBlend: chapterChanged ? 0 : Math.min(1, state.skyBlend + 0.016),
+    };
+  }),
+
+  advanceSkyBlend: (delta) => set((state) => ({
+    skyBlend: Math.min(1, state.skyBlend + delta),
+  })),
+
+  setInteractionTarget: (target) => set({ interactionTarget: target }),
+
+  openInteraction: () => set({ isInteracting: true }),
+
+  closeInteraction: () => set({ isInteracting: false, interactionTarget: null }),
 
   setWorldWidth: (width) => set({ worldWidth: width }),
 }));
