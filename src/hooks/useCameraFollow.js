@@ -7,9 +7,10 @@ export const useCameraFollow = (viewportWidth) => {
 
     const updateCamera = () => {
       const state = useGameStore.getState();
-      const targetCamX = state.player.x - viewportWidth / 2;
+      const zoomedViewport = viewportWidth / 1.18;
+      const targetCamX = state.player.x - zoomedViewport / 2;
       // Clamp camera within world boundaries
-      const clampedTargetX = Math.max(0, Math.min(state.worldWidth - viewportWidth, targetCamX));
+      const clampedTargetX = Math.max(0, Math.min(state.worldWidth - zoomedViewport, targetCamX));
 
       // Smooth interpolation (lerp)
       const currentX = state.camera.x;

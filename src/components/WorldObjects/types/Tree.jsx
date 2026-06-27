@@ -1,10 +1,23 @@
 // Tree.jsx — Animated SVG tree with subtle sway
 import React from 'react';
 
+const hash = (str) => {
+  let h = 0;
+  for (let i = 0; i < str.length; i++) {
+    h = (h << 5) - h + str.charCodeAt(i);
+    h |= 0;
+  }
+  return Math.abs(h);
+};
+
 export const TreeObject = ({ el }) => {
   const w = el.width ?? 80;
   const h = el.height ?? 180;
-  const animId = `tree-sway-${el.id}`;
+
+  // Generate deterministic scale (0.7x - 2.5x) and flip based on id/x
+  const seed = hash(el.id || String(el.x));
+  const scale = 0.7 + (seed % 181) / 100; // 0.7 to 2.5
+  const mirror = (seed % 2 === 0) ? -1 : 1;
 
   return (
     <div
@@ -16,8 +29,9 @@ export const TreeObject = ({ el }) => {
         height: `${h}px`,
         pointerEvents: 'none',
         transformOrigin: 'bottom center',
-        animation: `treeSway 4s ease-in-out infinite`,
-        animationDelay: `${(el.x % 7) * 0.3}s`,
+        transform: `scale(${scale * mirror}, ${scale})`,
+        animation: `treeSway 6s ease-in-out infinite`,
+        animationDelay: `${(seed % 7) * 0.4}s`,
       }}
     >
       <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`}>

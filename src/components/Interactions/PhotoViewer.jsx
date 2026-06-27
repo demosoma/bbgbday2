@@ -20,7 +20,6 @@ export const PhotoViewer = ({ target }) => {
 
   return (
     <div style={{ padding: '40px 40px 32px', textAlign: 'center' }}>
-      {/* Polaroid frame */}
       <motion.div
         initial={{ scale: 0.75, opacity: 0, rotate: -3 }}
         animate={{ scale: 1, opacity: 1, rotate: 0 }}
@@ -28,10 +27,10 @@ export const PhotoViewer = ({ target }) => {
         style={{
           display: 'inline-block',
           background: '#f9f5f0',
-          padding: '14px 14px 44px',
-          borderRadius: '4px',
-          boxShadow: '0 12px 40px rgba(0,0,0,0.5)',
-          maxWidth: '360px',
+          padding: '20px 20px 60px',
+          borderRadius: '6px',
+          boxShadow: '0 15px 45px rgba(0, 0, 0, 0.6)',
+          maxWidth: '500px',
           width: '100%',
         }}
       >
@@ -58,11 +57,11 @@ export const PhotoViewer = ({ target }) => {
               </svg>
               <div style={{
                 position: 'absolute',
-                bottom: '10px',
+                bottom: '12px',
                 left: '50%',
                 transform: 'translateX(-50%)',
                 color: 'rgba(255,255,255,0.65)',
-                fontSize: '11px',
+                fontSize: '13px',
                 fontFamily: 'serif',
                 fontStyle: 'italic',
                 textShadow: '0 1px 3px rgba(0,0,0,0.5)',
@@ -77,9 +76,9 @@ export const PhotoViewer = ({ target }) => {
         {/* Caption */}
         {photo.caption && (
           <div style={{
-            marginTop: '12px',
+            marginTop: '16px',
             fontFamily: 'Georgia, serif',
-            fontSize: '13px',
+            fontSize: '16px',
             color: '#5a4a3a',
             lineHeight: '1.5',
             textAlign: 'center',
@@ -91,9 +90,9 @@ export const PhotoViewer = ({ target }) => {
         {/* Date */}
         {photo.date && (
           <div style={{
-            marginTop: '6px',
+            marginTop: '8px',
             fontFamily: 'sans-serif',
-            fontSize: '11px',
+            fontSize: '13px',
             color: '#8a7a6a',
             textAlign: 'center',
             letterSpacing: '0.04em',

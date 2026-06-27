@@ -72,59 +72,88 @@ export const InteractionOverlay = () => {
             style={{
               position: 'fixed',
               inset: 0,
-              background: 'rgba(5, 5, 20, 0.72)',
-              backdropFilter: 'blur(6px)',
+              background: 'rgba(5, 5, 20, 0.45)', // dark overlay
+              backdropFilter: 'blur(8px)',        // 8px background blur
               zIndex: 100,
             }}
           />
 
-          {/* Content panel */}
-          <motion.div
-            key="panel"
-            initial={{ opacity: 0, scale: 0.88, y: 30 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.92, y: 20 }}
-            transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
+          {/* Fullscreen Fixed Layout for Flex Center */}
+          <div
             style={{
               position: 'fixed',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
+              inset: 0,
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
               zIndex: 101,
-              maxWidth: '640px',
-              width: '90vw',
-              maxHeight: '80vh',
-              overflowY: 'auto',
-              borderRadius: '16px',
-              background: 'rgba(14, 10, 38, 0.96)',
-              border: '1px solid rgba(255,255,255,0.12)',
-              boxShadow: '0 24px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05)',
+              pointerEvents: 'none',
             }}
           >
-            {/* Close button */}
-            <button
-              onClick={closeInteraction}
+            {/* Content panel */}
+            <motion.div
+              key="panel"
+              initial={{ opacity: 0, scale: 0.88, y: 30 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.92, y: 20 }}
+              transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
               style={{
-                position: 'absolute',
-                top: '14px',
-                right: '16px',
-                background: 'rgba(255,255,255,0.08)',
-                border: '1px solid rgba(255,255,255,0.15)',
-                borderRadius: '8px',
-                color: 'rgba(255,255,255,0.6)',
-                fontSize: '12px',
-                padding: '4px 10px',
-                cursor: 'pointer',
-                letterSpacing: '0.05em',
-                fontFamily: 'sans-serif',
-                zIndex: 10,
+                pointerEvents: 'auto',
+                position: 'relative',
+                display: 'flex',
+                flexDirection: 'column',
+                width: 'min(900px, 90vw)',
+                height: 'min(700px, 85vh)',
+                borderRadius: '16px',
+                background: 'rgba(14, 10, 38, 0.96)',
+                border: '1px solid rgba(255,255,255,0.12)',
+                boxShadow: '0 24px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05)',
+                overflow: 'hidden',
               }}
             >
-              ESC
-            </button>
+              {/* Header / Top bar with Fixed Close button */}
+              <div style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                height: '52px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'flex-end',
+                padding: '0 16px',
+                pointerEvents: 'none',
+                zIndex: 10,
+              }}>
+                <button
+                  onClick={closeInteraction}
+                  style={{
+                    pointerEvents: 'auto',
+                    background: 'rgba(255,255,255,0.08)',
+                    border: '1px solid rgba(255,255,255,0.15)',
+                    borderRadius: '8px',
+                    color: 'rgba(255,255,255,0.6)',
+                    fontSize: '12px',
+                    padding: '4px 10px',
+                    cursor: 'pointer',
+                    letterSpacing: '0.05em',
+                    fontFamily: 'sans-serif',
+                  }}
+                >
+                  ESC
+                </button>
+              </div>
 
-            {getViewer()}
-          </motion.div>
+              {/* Scrollable Modal Body */}
+              <div style={{
+                flex: 1,
+                overflowY: 'auto',
+                padding: '24px 0 0', // clearance for fixed header
+              }}>
+                {getViewer()}
+              </div>
+            </motion.div>
+          </div>
         </>
       )}
     </AnimatePresence>

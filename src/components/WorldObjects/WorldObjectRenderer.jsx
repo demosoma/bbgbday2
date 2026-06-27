@@ -14,6 +14,8 @@ import { WishTreeObject }      from './types/WishTreeObject';
 import { CakeObject }          from './types/CakeObject';
 import { MemoryMarkerObject }  from './types/MemoryMarkerObject';
 
+import { useGameStore } from '../../stores/gameStore';
+
 // Registry: map type string → component
 const TYPE_MAP = {
   tree:         TreeObject,
@@ -27,12 +29,17 @@ const TYPE_MAP = {
   memoryMarker: MemoryMarkerObject,
 };
 
-export const WorldObjectRenderer = () => (
-  <>
-    {worldData.foregroundElements.map((el) => {
-      const Component = TYPE_MAP[el.type];
-      if (!Component) return null;
-      return <Component key={el.id} el={el} />;
-    })}
-  </>
-);
+export const WorldObjectRenderer = () => {
+  const targetId = useGameStore((s) => s.interactionTarget?.id);
+
+  return (
+    <>
+      {worldData.foregroundElements.map((el) => {
+        const Component = TYPE_MAP[el.type];
+        if (!Component) return null;
+        const isTarget = el.id === targetId;
+        return <Component key={el.id} el={el} isTarget={isTarget} />;
+      })}
+    </>
+  );
+};

@@ -1,9 +1,9 @@
 // WishTreeObject.jsx — World object: a magical glowing wish tree
 import React from 'react';
 
-export const WishTreeObject = ({ el }) => {
-  const w = el.width ?? 160;
-  const h = el.height ?? 280;
+export const WishTreeObject = ({ el, isTarget }) => {
+  const w = 180;
+  const h = 315;
 
   return (
     <div
@@ -14,13 +14,17 @@ export const WishTreeObject = ({ el }) => {
         width: `${w}px`,
         height: `${h}px`,
         pointerEvents: 'none',
-        filter: 'drop-shadow(0 0 20px rgba(180, 130, 255, 0.4))',
+        transition: 'all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1)',
+        filter: isTarget 
+          ? 'drop-shadow(0 0 30px rgba(196, 150, 255, 0.95))' 
+          : 'drop-shadow(0 0 12px rgba(180, 130, 255, 0.4))',
+        animation: isTarget ? 'floatBob 3.2s ease-in-out infinite' : 'none',
       }}
     >
-      <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`}>
+      <svg width={w} height={h} viewBox={`0 0 160 280`} style={{ overflow: 'visible' }}>
         {/* Trunk */}
         <path
-          d={`M ${w * 0.45} ${h * 0.65} C ${w * 0.4} ${h * 0.5} ${w * 0.42} ${h * 0.38} ${w * 0.5} ${h * 0.25}`}
+          d="M 72 182 C 64 140 67.2 106.4 80 70"
           stroke="#5c4538"
           strokeWidth="14"
           fill="none"
@@ -28,30 +32,30 @@ export const WishTreeObject = ({ el }) => {
         />
         {/* Secondary trunk */}
         <path
-          d={`M ${w * 0.5} ${h * 0.85} C ${w * 0.5} ${h * 0.7} ${w * 0.5} ${h * 0.65} ${w * 0.45} ${h * 0.65}`}
+          d="M 80 238 C 80 196 80 182 72 182"
           stroke="#5c4538"
           strokeWidth="16"
           fill="none"
           strokeLinecap="round"
         />
         {/* Branches */}
-        <path d={`M ${w * 0.45} ${h * 0.5} Q ${w * 0.2} ${h * 0.3} ${w * 0.15} ${h * 0.1}`}
+        <path d="M 72 140 Q 32 84 24 28"
           stroke="#5c4538" strokeWidth="6" fill="none" strokeLinecap="round" />
-        <path d={`M ${w * 0.5} ${h * 0.38} Q ${w * 0.7} ${h * 0.2} ${w * 0.8} ${h * 0.08}`}
+        <path d="M 80 106.4 Q 112 56 128 22.4"
           stroke="#5c4538" strokeWidth="6" fill="none" strokeLinecap="round" />
-        <path d={`M ${w * 0.48} ${h * 0.44} Q ${w * 0.55} ${h * 0.25} ${w * 0.6} ${h * 0.1}`}
+        <path d="M 76.8 123.2 Q 88 70 96 28"
           stroke="#5c4538" strokeWidth="4" fill="none" strokeLinecap="round" />
 
         {/* Glowing foliage */}
-        <ellipse cx={w * 0.5} cy={h * 0.3} rx={w * 0.42} ry={h * 0.22} fill="#3d2a6b" opacity="0.85" />
-        <ellipse cx={w * 0.5} cy={h * 0.22} rx={w * 0.35} ry={h * 0.18} fill="#4a2e80" opacity="0.9" />
-        <ellipse cx={w * 0.5} cy={h * 0.14} rx={w * 0.24} ry={h * 0.13} fill="#5a3594" />
+        <ellipse cx="80" cy="84" rx="67.2" ry="61.6" fill="#3d2a6b" opacity="0.85" />
+        <ellipse cx="80" cy="61.6" rx="56" ry="50.4" fill="#4a2e80" opacity="0.9" />
+        <ellipse cx="80" cy="39.2" rx="38.4" ry="36.4" fill="#5a3594" />
 
         {/* Magical sparkle dots */}
         {[
-          [w * 0.25, h * 0.15], [w * 0.7,  h * 0.1 ], [w * 0.4, h * 0.28],
-          [w * 0.65, h * 0.25], [w * 0.3,  h * 0.35], [w * 0.55, h * 0.18],
-          [w * 0.45, h * 0.08], [w * 0.6,  h * 0.38], [w * 0.22, h * 0.28],
+          [40, 42], [112, 28], [64, 78.4],
+          [104, 70], [48, 98], [88, 50.4],
+          [72, 22.4], [96, 106.4], [35.2, 78.4],
         ].map(([cx, cy], i) => (
           <circle
             key={i}
@@ -65,7 +69,7 @@ export const WishTreeObject = ({ el }) => {
         ))}
 
         {/* Wish ribbons hanging from branches */}
-        {[[w * 0.28, h * 0.32], [w * 0.58, h * 0.28], [w * 0.42, h * 0.36]].map(([x, y], i) => (
+        {[[44.8, 89.6], [92.8, 78.4], [67.2, 100.8]].map(([x, y], i) => (
           <g key={i}>
             <line x1={x} y1={y} x2={x + ((i % 2 === 0) ? -6 : 6)} y2={y + 20}
               stroke={['#f687b3','#9f7aea','#68d391'][i]} strokeWidth="1.5" opacity="0.8" />
