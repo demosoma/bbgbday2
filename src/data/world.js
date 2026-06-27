@@ -26,7 +26,7 @@ export const worldData = {
   foregroundElements: [
     // ── CHAPTER: birth (0–1100) ─────────────────────────────────────
     { id: 'protagonist-house', x: 250, y: 220, type: 'house', width: 300, height: 200,
-      title: 'Home', chapter: 'birth' },
+      title: 'Trimurti', chapter: 'birth' },
     { id: 'tree-1',   x: 680,  y: 260, type: 'tree', height: 180, width: 80, chapter: 'birth' },
     { id: 'tree-2',   x: 720,  y: 280, type: 'tree', height: 150, width: 70, chapter: 'birth' },
     { id: 'flower-1', x: 660,  y: 410, type: 'flower', color: '#f687b3', chapter: 'birth' },
