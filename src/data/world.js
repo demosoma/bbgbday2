@@ -99,13 +99,27 @@ export const worldData = {
     { id: 'marker-wish', x: 8050, y: 350, type: 'memoryMarker',
       label: 'Wish Tree', chapter: 'wish_tree' },
 
-    // ── CHAPTER: future (8200–9600) ──────────────────────────────────
-    { id: 'tree-15',  x: 8350, y: 260, type: 'tree',   height: 200, width: 90, chapter: 'future' },
-    { id: 'tree-16',  x: 8400, y: 280, type: 'tree',   height: 220, width: 95, chapter: 'future' },
-    { id: 'flower-14',x: 8520, y: 430, type: 'flower', color: '#68d391', chapter: 'future' },
-    { id: 'flower-15',x: 8550, y: 420, type: 'flower', color: '#f687b3', chapter: 'future' },
-    { id: 'cake-1',   x: 8850, y: 370, type: 'cake',   chapter: 'future', label: 'Happy Birthday!' },
-    { id: 'flower-16',x: 9100, y: 440, type: 'flower', color: '#a5b4fc', chapter: 'future' },
-    { id: 'fence-5',  x: 9280, y: 380, type: 'fence',  count: 5,   chapter: 'future' },
+    // ── CHAPTER: gallery (8200–9400) ─────────────────────────────────
+    { id: 'tree-15',  x: 8350, y: 260, type: 'tree',   height: 200, width: 90, chapter: 'gallery' },
+    { id: 'tree-16',  x: 8400, y: 280, type: 'tree',   height: 220, width: 95, chapter: 'gallery' },
+    { id: 'flower-14',x: 8520, y: 430, type: 'flower', color: '#fcd34d', chapter: 'gallery' },
+    { id: 'flower-15',x: 8555, y: 420, type: 'flower', color: '#f687b3', chapter: 'gallery' },
+    // Gallery board — the interactive moment
+    { id: 'gallery-board-1', x: 8760, y: 310, type: 'gallery',
+      chapter: 'gallery', label: 'Gallery of Moments' },
+    { id: 'flower-g1', x: 8900, y: 440, type: 'flower', color: '#a5b4fc', chapter: 'gallery' },
+    { id: 'fence-6',   x: 9050, y: 380, type: 'fence',  count: 5,   chapter: 'gallery' },
+    { id: 'tree-g1',   x: 9200, y: 260, type: 'tree',   height: 185, width: 85, chapter: 'gallery' },
+
+    // ── CHAPTER: future / The Last Letter (9400–10800) ───────────────
+    { id: 'tree-17',   x: 9500, y: 260, type: 'tree',   height: 200, width: 90, chapter: 'future' },
+    { id: 'flower-16', x: 9620, y: 435, type: 'flower', color: '#a5b4fc', chapter: 'future' },
+    { id: 'cake-1',    x: 9820, y: 370, type: 'cake',   chapter: 'future', label: 'Happy Birthday!' },
+    { id: 'flower-17', x: 10020, y: 430, type: 'flower', color: '#f9a8d4', chapter: 'future' },
+    { id: 'tree-18',   x: 10180, y: 265, type: 'tree',  height: 190, width: 88, chapter: 'future' },
+    // The Last Letter — emotional ending trigger
+    { id: 'final-letter', x: 10400, y: 385, type: 'letter',
+      interactionId: 'letter_final', label: 'A Final Letter', chapter: 'future' },
+    { id: 'flower-18', x: 10560, y: 435, type: 'flower', color: '#d6bcfa', chapter: 'future' },
   ],
 };

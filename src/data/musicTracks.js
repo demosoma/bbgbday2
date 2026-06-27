@@ -6,6 +6,7 @@ export const chapterMusic = {
   meeting: '/audio/music/when-we-met.mp3',
   letters: '/audio/music/letters.mp3',
   wish_tree: '/audio/music/wish-tree.mp3',
+  gallery: '/audio/music/gallery.mp3',
   future: '/audio/music/ending.mp3',
 };
 

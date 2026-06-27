@@ -13,6 +13,7 @@ import { PhotoObject }         from './types/PhotoObject';
 import { WishTreeObject }      from './types/WishTreeObject';
 import { CakeObject }          from './types/CakeObject';
 import { MemoryMarkerObject }  from './types/MemoryMarkerObject';
+import { GalleryObject }       from './types/GalleryObject';
 
 import { useGameStore } from '../../stores/gameStore';
 
@@ -25,6 +26,7 @@ const TYPE_MAP = {
   letter:       LetterObject,
   photo:        PhotoObject,
   wishTree:     WishTreeObject,
+  gallery:      GalleryObject,
   cake:         CakeObject,
   memoryMarker: MemoryMarkerObject,
 };

@@ -10,7 +10,7 @@ import { worldData } from '../data/world';
 const INTERACTION_RADIUS = 90; // px
 
 // Filter to objects that have interaction capability
-const interactableTypes = new Set(['letter', 'photo', 'wishTree', 'cake', 'memoryMarker']);
+const interactableTypes = new Set(['letter', 'photo', 'wishTree', 'gallery', 'cake', 'memoryMarker']);
 
 const interactableObjects = worldData.foregroundElements.filter(
   (el) => interactableTypes.has(el.type)
@@ -38,7 +38,9 @@ export const useProximityDetector = () => {
 
       for (const obj of interactableObjects) {
         const dx = obj.x - px;
-        const dy = obj.y - py;
+        // Project tall objects (like wishTree) to the player's Y for proximity detection
+        const targetY = obj.type === 'wishTree' ? py : obj.y;
+        const dy = targetY - py;
         const dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < INTERACTION_RADIUS && dist < nearestDist) {
           nearestDist = dist;

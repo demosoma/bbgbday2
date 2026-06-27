@@ -21,6 +21,7 @@ import { SkyManager }           from '../Sky/SkyManager';
 import { WorldObjectRenderer }  from '../WorldObjects/WorldObjectRenderer';
 import { InteractionPrompt }    from '../UI/InteractionPrompt';
 import { InteractionOverlay }   from '../UI/InteractionOverlay';
+import { EndingSequence }       from '../UI/EndingSequence';
 import { ChapterTitle }         from '../UI/ChapterTitle';
 import { Particles }            from '../FX/Particles';
 import { AmbientTint }          from '../FX/AmbientTint';
@@ -52,6 +53,7 @@ export const World = () => {
   const pathMinY      = useGameStore((s) => s.pathMinY);
   const pathMaxY      = useGameStore((s) => s.pathMaxY);
   const isInteracting = useGameStore((s) => s.isInteracting);
+  const isEnding      = useGameStore((s) => s.isEnding);
 
   // ── Parallax transforms ────────────────────────────────────────────────
   const bgTransform  = `translateX(${-cameraX * 0.15}px)`;
@@ -245,6 +247,9 @@ export const World = () => {
 
       {/* Interaction modal overlay */}
       <InteractionOverlay />
+
+      {/* Ending sequence — fixed overlay, rendered last */}
+      <EndingSequence />
     </div>
   );
 };

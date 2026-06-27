@@ -9,11 +9,13 @@ import { useGameStore } from '../../stores/gameStore';
 import { LetterViewer }    from '../Interactions/LetterViewer';
 import { PhotoViewer }     from '../Interactions/PhotoViewer';
 import { WishTreeViewer }  from '../Interactions/WishTreeViewer';
+import { GalleryViewer }   from '../Interactions/GalleryViewer';
 
 const VIEWER_MAP = {
   letter:       LetterViewer,
   photo:        PhotoViewer,
   wishTree:     WishTreeViewer,
+  gallery:      GalleryViewer,
   cake:         null, // placeholder — will show a simple card
   memoryMarker: null,
 };
@@ -52,6 +54,7 @@ export const InteractionOverlay = () => {
     if (target.type === 'letter')       return <LetterViewer target={target} />;
     if (target.type === 'photo')        return <PhotoViewer target={target} />;
     if (target.type === 'wishTree')     return <WishTreeViewer target={target} />;
+    if (target.type === 'gallery')      return <GalleryViewer target={target} />;
     if (target.type === 'cake')         return <CakeViewer target={target} />;
     if (target.type === 'memoryMarker') return <MemoryMarkerViewer target={target} />;
     return null;

@@ -19,7 +19,7 @@ export const useGameStore = create((set) => ({
   },
 
   // ─── World Boundaries ──────────────────────────────────────
-  worldWidth: 9600,
+  worldWidth: 10800,
   worldHeight: 600,
   pathMinY: 300,
   pathMaxY: 480,
@@ -33,6 +33,8 @@ export const useGameStore = create((set) => ({
   // ─── Interaction State ─────────────────────────────────────
   interactionTarget: null,   // nearest interactable object in range { id, type, x, y, data }
   isInteracting: false,      // true while an interaction overlay is open
+  finalLetterRead: false,    // true once the final letter has been closed
+  isEnding: false,           // true when the end sequence is triggered
 
   // ─── Actions ───────────────────────────────────────────────
   updatePlayer: (updates) => set((state) => ({
@@ -64,7 +66,18 @@ export const useGameStore = create((set) => ({
 
   openInteraction: () => set({ isInteracting: true }),
 
-  closeInteraction: () => set({ isInteracting: false, interactionTarget: null }),
+  closeInteraction: () => {
+    set((state) => {
+      const isFinalLetter = state.interactionTarget?.id === 'final-letter';
+      return {
+        isInteracting: false,
+        interactionTarget: null,
+        finalLetterRead: isFinalLetter ? true : state.finalLetterRead,
+      };
+    });
+  },
+
+  setEnding: (ending) => set({ isEnding: ending }),
 
   setWorldWidth: (width) => set({ worldWidth: width }),
 }));

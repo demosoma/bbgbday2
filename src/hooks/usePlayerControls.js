@@ -43,8 +43,8 @@ export const usePlayerControls = () => {
     const tick = () => {
       const state = useGameStore.getState();
 
-      // Pause movement while an interaction overlay is open
-      if (state.isInteracting) {
+      // Pause movement while an interaction overlay is open or ending is active
+      if (state.isInteracting || state.isEnding) {
         animationFrameId = requestAnimationFrame(tick);
         return;
       }

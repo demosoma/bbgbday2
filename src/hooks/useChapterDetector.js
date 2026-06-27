@@ -28,6 +28,11 @@ export const useChapterDetector = () => {
         lastProgress = progress;
       }
 
+      // Trigger final ending sequence when player walks past the last letter
+      if (state.finalLetterRead && state.player.x >= 10250 && !state.isEnding) {
+        state.setEnding(true);
+      }
+
       // Advance sky blend every frame
       if (state.skyBlend < 1) {
         state.advanceSkyBlend(0.02);
